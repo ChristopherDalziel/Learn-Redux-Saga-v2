@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import placeHolderImage from "./logo.png";
+import "./app.css";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -9,22 +10,21 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={dog || logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Dog Saga</h1>
+          {/* On first load, show logo.. on click show a dog! */}
+          <img src={dog || placeHolderImage} className="App-logo" alt="logo" />
+          <h1 className="App-title">Dog Redux Saga</h1>
         </header>
 
-        {dog ? (
-          <p className="App-intro">Keep clicking for new dogs</p>
-        ) : (
-          <p className="App-intro">Replace the React icon with a dog!</p>
-        )}
+        <p className="App-intro">Get a new dog every click!</p>
 
+        {/* While app is fetching the api request button is disabled and displays a different string */}
         {fetching ? (
           <button disabled>Fetching...</button>
         ) : (
           <button onClick={onRequestDog}>Request a Dog</button>
         )}
 
+        {/* Error message if no dog is fetched */}
         {error && <p style={{ color: "red" }}>Uh oh - something went wrong!</p>}
       </div>
     );

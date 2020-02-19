@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Basic React Redux application to assist in learning the ins and outs of Redux-saga
 
-## Available Scripts
+# Screenshots
 
-In the project directory, you can run:
+![Screen shot 1](./screen1.png)
+![Screen shot 2](./screen2.png)
 
-### `yarn start`
+# Tech
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Redux
+- Redux Saga
+- React
+- create-react-app
+- NPM
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# Redux Saga Dog App Recap:
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- An event takes place — e.g. user does something (clicks “Request a Dog” button) or an update occurs (like componentDidMount)
+  Based on the event, an action is dispatched, likely through a function declared in mapDispatchToProps (e.g.onRequestDog)
+- A watcherSaga sees the action and triggers a workerSaga. Use saga helpers to watch for actions differently.
+- While the saga is starting, the action also hits a reducer and updates some piece of state to indicate that the saga has begun and is in process (e.g. fetching).
+- The workerSaga performs some side-effect operation (e.g. fetchDog).
+- Based on the result of the workerSaga‘s operation, it dispatches an action to indicate that result. If successful (API_CALL_SUCCESS), you might include a payload in the action (e.g. dog). If an error (API_CALL_FAILURE), you might send along an error object for more details on what went wrong.
+- The reducer handles the success or failure action from the workerSaga and updates the Store accordingly with any new data, as well as sets the “in process” indicator (e.g. fetching) to false.
