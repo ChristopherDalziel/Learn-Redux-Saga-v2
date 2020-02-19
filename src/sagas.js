@@ -22,5 +22,8 @@ function* workerSaga() {
 
     // Dispatch a success actionType to the store with the new dog
     yield put({ type: "API_CALL_SUCCESS", dog });
+  } catch (error) {
+    // Dispatch a fail actionType to the store with the error
+    yield put({ type: "API_CALL_FAILURE", error });
   }
 }
