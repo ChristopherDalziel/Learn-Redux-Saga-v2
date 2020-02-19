@@ -9,7 +9,7 @@ export function* watcherSaga() {
 // Function that will create our API request and return a response
 function fetchDog() {
   return axios({
-    method: get,
+    method: "get",
     url: "https://dog.ceo/api/breeds/image/random"
   });
 }
@@ -27,3 +27,15 @@ function* workerSaga() {
     yield put({ type: "API_CALL_FAILURE", error });
   }
 }
+
+// Notes:
+
+/* 
+takeLatest -  is a helper function provided by redux-saga that will trigger a new workerSaga when it sees an API_CALL_REQUEST, while cancelling any previously triggered workerSaga still in process.
+
+yield - in a generator basically represents an asynchronous step in a more synchronous/sequential process — somewhat like await in an async function.
+
+watcherSaga - is a saga that watches for an action to be dispatched to the Store, triggering a workerSaga.
+
+workerSaga - attempts to fetchDog, using another redux-saga helper function call, and stores the result (a resolved or failed Promise) in a response variable.
+*/
